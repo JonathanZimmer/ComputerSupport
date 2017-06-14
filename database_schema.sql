@@ -58,17 +58,11 @@ DROP TABLE IF EXISTS `devices`;
 CREATE TABLE IF NOT EXISTS `devices` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner` varchar(64) NOT NULL,
-  `assignedto_id` int(11) NOT NULL,
-  `received` datetime NOT NULL,
   `problem` varchar(256) NOT NULL,
   `resolution` varchar(256) NOT NULL,
   `notes` varchar(512) NOT NULL,
-  `repaired` datetime NOT NULL,
-  `returned` datetime NOT NULL,
-  `last_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `receivedby_id` int(11) NOT NULL,
   `serial` varchar(64) NOT NULL,
-  `status_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
  
@@ -88,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `students` (
   `class` varchar(4) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
-  `bio` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
  
@@ -96,12 +89,12 @@ CREATE TABLE IF NOT EXISTS `students` (
 -- Dumping data for table `students`
 --
  
-INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`, `bio`, `admin`) VALUES
-(1, 'student1', 'student1', 'Student 1', '2001', 1, '', 0),
-(2, 'student2', 'student2', 'Student 2', '2002', 1, '', 0),
-(3, 'student3', 'student3', 'Student 3', '2004', 1, '', 0),
-(9, 'steavie', 'steavie', 'Steavie', '2020', 1, '', 0),
-(14, 'admin', 'admin', 'Admin', '2000', 1, '', 1);
+INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`, `admin`) VALUES
+(1, 'student1', 'student1', 'Student 1', '2001', 1, 0),
+(2, 'student2', 'student2', 'Student 2', '2002', 1, 0),
+(3, 'student3', 'student3', 'Student 3', '2004', 1, 0),
+(9, 'steavie', 'steavie', 'Steavie', '2020', 1, 0),
+(14, 'admin', 'admin', 'Admin', '2000', 1, 1);
  
 -- --------------------------------------------------------
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
