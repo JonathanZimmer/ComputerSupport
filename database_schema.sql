@@ -23,7 +23,7 @@ CREATE DATABASE IF NOT EXISTS `stt` DEFAULT CHARACTER SET latin1 COLLATE latin1_
 USE `stt`;
  
  
--- --------------------------------------------------------
+-----------------------------------------------------------
  
 --
 -- Table structure for table `incidents`
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `incidents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
  
  
--- --------------------------------------------------------
+-----------------------------------------------------------
  
 --
 -- Table structure for table `students`
@@ -77,7 +77,50 @@ INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`,
 (9, 'steavie', 'steavie', 'Steavie', '2020', 1, 0),
 (14, 'admin', 'admin', 'Admin', '2000', 1, 1);
  
--- --------------------------------------------------------
+ 
+ -----------------------------------------------------------
+ 
+--
+-- Table structure for table `inventory`
+--
+ 
+DROP TABLE IF EXISTS `inventory`;
+CREATE TABLE IF NOT EXISTS `inventory` (
+  `StudentOwner` varchar(64) NOT NULL,
+  `LaptopEtch` varchar(128) NOT NULL,
+  `LaptopSerial` varchar(64) NOT NULL,
+  `Brand` varchar(64) NOT NULL,
+  `TakeHome` tinyint(1) NOT NULL,
+  `ChargerSerial` varchar(64) NOT NULL,
+  `GradYear` int(4) NOT NULL,
+  PRIMARY KEY (`GradYear`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+ 
+
+-----------------------------------------------------------
+ 
+--
+-- Table structure for table `Brand`
+--
+ 
+DROP TABLE IF EXISTS `LaptopBrand`;
+CREATE TABLE IF NOT EXISTS `LaptopBrand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+ 
+--
+-- Dumping data for table `LaptopBrand`
+--
+ 
+INSERT INTO `LaptopBrand` (`id`, `name`) VALUES
+(1, 'Lenovo'),
+(2, 'Dell'),
+(3, 'Samsung');
+
+
+-----------------------------------------------------------
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
