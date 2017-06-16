@@ -19,8 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `stt`
 --
-CREATE DATABASE IF NOT EXISTS `STT` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `STT`;
+CREATE DATABASE IF NOT EXISTS `stt` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `stt`;
  
  
 -- --------------------------------------------------------
@@ -44,25 +44,6 @@ CREATE TABLE IF NOT EXISTS `incidents` (
   `newchargerserial` varchar(64) NOT NULL,
   `explanation` varchar(256) NOT NULL,
   `receviedby` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
- 
- 
--- --------------------------------------------------------
- 
---
--- Table structure for table `devices`
---
- 
-DROP TABLE IF EXISTS `devices`;
-CREATE TABLE IF NOT EXISTS `devices` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `owner` varchar(64) NOT NULL,
-  `problem` varchar(256) NOT NULL,
-  `resolution` varchar(256) NOT NULL,
-  `notes` varchar(512) NOT NULL,
-  `receivedby_id` int(11) NOT NULL,
-  `serial` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
  

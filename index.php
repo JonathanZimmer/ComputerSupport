@@ -5,7 +5,7 @@
 	//start connection
 	$conn = mysql_connect("localhost", $g_username, $g_password);
 	//access correct database
-	mysql_select_db('STT', $conn);
+	mysql_select_db('stt', $conn);
 ?>
 
 <center>
