@@ -5,7 +5,7 @@
 	//start connection
 	$conn = mysql_connect("localhost", $g_username, $g_password);
 	//access correct database
-	mysql_select_db('stt', $conn);
+	mysql_select_db('STT', $conn);
 ?>
 
 <center>
@@ -15,6 +15,57 @@
 	</h2>
   <form method="post" name="postIt">
     <table>
+
+			<!-- Date Recieved input field -->
+      <tr><td>Date Recieved</td><td><input type="date" name="jDate" placeholder="Date" value="<?php echo date("Y-m-d");?>"></td></tr>
+			
+ 			<!-- Owner input field -->
+ 			<tr><td>Owner of Laptop</td><td><input type="text" name="jOwner" placeholder="Owner"></td></tr>
+			
+			
+			
+			<!-- Laptop serial input field -->
+ 			<tr><td>Serial Number of Laptop</td><td><textarea name="jLaptopNumber" placeholder="Laptop Serial Number" onChange="this.form.jLaptopTaken.selectedIndex=0"></textarea></td></tr>
+			
+			
+			<!-- Laptop taken input field -->		 
+			<tr><td>Laptop taken from student?</td>
+        <td>
+          <select name="jLaptopTaken" onChange="document.getElementById('lserialrow').style='display: table-row'">
+            <!-- replace options with a query later -->
+            <option value="1">Yes</option>
+            <option value="2" selected>No</option>
+          </select>
+        </td>
+      </tr>
+
+			<!-- Serial Number input field -->
+			<tr id=lserialrow style="display:none"><td>Serial Number of new laptop</td><td><textarea name="jNewNumber" placeholder="New Serial Number"></textarea></td></tr>
+
+			
+		  <!-- Charger serial input field -->
+ 			<tr><td>Serial Number of Charger</td><td><textarea name="jChargerNumber" placeholder="Charger Serial Number" onChange="this.form.jChargerTaken.selectedIndex=0"></textarea></td></tr>
+		
+
+	
+			<!-- Charger taken input field -->		 
+			<tr><td>Charger taken from student?</td>
+        <td>
+          <select name="jChargerTaken"  onChange="document.getElementById('cserialrow').style='display: table-row'">
+            <!-- replace options with a query later -->
+            <option value="1">Yes</option>
+            <option value="2" selected>No</option>
+          </select>
+        </td>
+      </tr>
+
+		<!-- Serial Number input field -->
+		<tr id=cserialrow style="display:none"><td>Serial Number of new laptop Charger</td><td><textarea name="jNewNumberCharger" placeholder="New Charger Serial Number"></textarea></td></tr>
+
+
+			<!-- Laptop incident input field -->
+ 			<tr><td>What's wrong with it?</td><td><textarea name="jIssue" placeholder="Problem" onChange="this.form.jLaptopTaken.selectedIndex=0"></textarea></td></tr>
+
 <?php
 if(!isset($_GET['kiosk'])){
 	echo "<tr><td>Who should get the points?</td><td><select name='personid'>";
@@ -27,64 +78,6 @@ if(!isset($_GET['kiosk'])){
 }
 echo "</option>";
 ?>
-			<!-- Date Recieved input field -->
-      <tr><td>Date Recieved</td><td><input type="date" name="jDate" placeholder="Date" value="<?php echo date("Y-m-d");?>"></td></tr>
-			
-      <!-- Owner input field -->
-      <tr><td>Owner of Laptop</td><td><input type="text" name="jOwner" placeholder="Owner"></td></tr>
-			
-
-		
-			<!-- Laptop serial input field -->
- 			<tr><td>Serial Number of Laptop</td><td><textarea name="jLaptopNumber" placeholder="Laptop Serial Number" onChange="this.form.jLaptopTaken.selectedIndex=0"></textarea></td></tr>
-			
-			  <!-- Laptop taken input field -->		 
-			<tr><td>Laptop taken from student?</td>
-        <td>
-          <select name="jLaptopTaken">
-            <!-- replace options with a query later -->
-            <option value="1">Yes</option>
-            <option value="2" selected>No</option>
-          </select>
-        </td>
-      </tr>
-
-			
-		  <!-- Charger serial input field -->
- 			<tr><td>Serial Number of Charger</td><td><textarea name="jChargerNumber" placeholder="Charger Serial Number" onChange="this.form.jChargerTaken.selectedIndex=0"></textarea></td></tr>
-		
-
-	
-			<!-- Charger taken input field -->		 
-			<tr><td>Charger taken from student?</td>
-        <td>
-          <select name="jChargerTaken">
-            <!-- replace options with a query later -->
-            <option value="1">Yes</option>
-            <option value="2" selected>No</option>
-          </select>
-        </td>
-      </tr>
- 
-		
-		  <!-- New Laptop input field -->
-		  <tr><td>Did you give a new laptop or charger to the student?</td>
-        <td>
-          <select name="jNewLaptop" onChange="document.getElementById('lserialrow').style='display: table-row';document.getElementById('cserialrow').style='display: table-row'">
-            <!-- replace options with a query later -->
-            <option value="1">No loaner given to student</option>
-            <option value="2">Loaner/Replacement given to student</option>
-          </select>
-        </td>
-      </tr>
-		
-			<!-- Serial Number input field -->
-			<tr id=lserialrow style="display:none"><td>Serial Number of new laptop</td><td><textarea name="jNewNumber" placeholder="New Serial Number"></textarea></td></tr>
-		
-		<!-- Serial Number input field -->
-			<tr id=cserialrow style="display:none"><td>Serial Number of new laptop Charger</td><td><textarea name="jNewNumberCharger" placeholder="New Charger Serial Number"></textarea></td></tr>
-		
-
 
       <tr><td colspan="2" style="text-align:center;"><input type="submit"></td></tr>
     
@@ -95,10 +88,11 @@ echo "</option>";
 
 	if ($_POST){
 		$personid = str_replace("'","",$_POST['personid']);
+		$problem = str_replace("'","",$_POST['jIssue']);
 		//make query to add an incident
 		$queryinsertincident = "INSERT INTO `incidents`
-			(`date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `receviedby`) VALUES 
-			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."',' ".$personid."')";
+			(`date`, `owner`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES 
+			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."', '".$problem."', '".$personid."')";
 	
 		//commence query to add an incident
 		 $result = mysql_query($queryinsertincident);
@@ -108,10 +102,7 @@ echo "</option>";
 			echo"Incident failed to report";
 			die('Invalid query: ' . mysql_error());
 			$fail = "True";
-		}else{
-			echo "New Incident Reported!<br>";
-			$fail = "False";
-		}
+		}else{}
 		
 		//
 		//add a job for incident
@@ -120,12 +111,10 @@ echo "</option>";
 			
 		}// end if laptop taken
 		
-	 // end if post
 ?>
 	</div>
 </center>
 
 <?php
-  makeFooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 	mysql_close($conn);
 ?>
