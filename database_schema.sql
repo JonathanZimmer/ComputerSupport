@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 -----------------------------------------------------------
  
 --
--- Table structure for table `Brand`
+-- Table structure for table `LaptopBrand`
 --
  
 DROP TABLE IF EXISTS `LaptopBrand`;

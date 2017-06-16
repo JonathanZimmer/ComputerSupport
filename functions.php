@@ -29,7 +29,6 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 //leave style as 0 if you want to keep the style from the makeHeader functions
 function makeFooter($footermessage,$pstyle,$footerbox=""){
 	echo("
-	<!--max devos made this -->
 	</div>
 		<style>". styleChoice($pstyle) ."</style>
 			");
@@ -116,75 +115,8 @@ function DisplayName()
 	echo $lookup[$_SESSION['loginid']];
 	}
 }
-function viewsofpage($uncletony){
-	
-	//init pass
-	global $g_username,$g_password;
-	
-	//create conection
-	$g_link = mysql_connect('localhost', $g_username, $g_password);
-	//select database
-	mysql_select_db('stt', $g_link);
-	
-	//make query
-	$query = "SELECT views FROM `pageviews` WHERE filename='$uncletony'";
-	
-	//start and store query
-	$result = mysql_query($query);
-	
-	//store into an array
-	($result = mysql_fetch_assoc($result));
-	
-	//get variable ready for manipulation
-	$variable = ($result['views'] + 1);
-		
-	//check if their are views already or not
-		if($variable>1){
-				//add a view to the page table
-						$query = "UPDATE `pageviews` SET `views`=" . ($variable) . " WHERE `filename`= '$uncletony'";
-						$result = mysql_query($query);
-		}
-		else{
-			//add a table for the file
-				$query = "INSERT INTO `pageviews`(`filename`, `views`) VALUES ('$uncletony',1)";
-				$result = mysql_query($query);
-		}
-	
-	//print views to screen
-		echo ("
-		<div class='viewCount'>
-			<div class='viewBox'>
-				<h3 class='countLeft'>Views: </h3>
-				<h3 class='countRight'> ". $variable ." </h3>
-			</div>
-		</div>
-		");
-}
-	function CheckModel($serial)
-	{
-		
-		//string value < 10 then it is a dell
-		
-		if(strlen($serial) < 8)
-		{
-			return "Dell";
-		}
-		
-				//substring value = "Stuff" it is a samsung
-		if(substr($serial, 0,4) == "HY3A")
-		{
-			return "Samsung";
-		}	
-		
-		//subtring value = "Other Stuff" it is a lenovo
-		
-		if(substr($serial, 0,4) == "LR03")
-		{
-			return "Lenovo";
-		}
-		return "Unknown";
-		
-	}
+
+
 	//query function
 	function queryFunc($query){
 		//commence query
