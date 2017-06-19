@@ -78,7 +78,7 @@ INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`,
 (14, 'admin', 'admin', 'Admin', '2000', 1, 1);
  
  
- -----------------------------------------------------------
+-----------------------------------------------------------
  
 --
 -- Table structure for table `inventory`
@@ -87,8 +87,7 @@ INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`,
 DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE IF NOT EXISTS `inventory` (
   `StudentOwner` varchar(64) NOT NULL,
-  `LaptopEtch` varchar(128) NOT NULL,
-  `LaptopSerial` varchar(64) NOT NULL,
+  `LaptopID` varchar(128) NOT NULL,
   `Brand` varchar(64) NOT NULL,
   `TakeHome` tinyint(1) NOT NULL,
   `ChargerSerial` varchar(64) NOT NULL,
@@ -96,6 +95,21 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   PRIMARY KEY (`GradYear`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
  
+
+-----------------------------------------------------------
+
+--
+-- Table structure for table `LaptopHistory`
+--
+ 
+DROP TABLE IF EXISTS `LaptopHistory`;
+CREATE TABLE IF NOT EXISTS `LaptopHistory` (
+  `LaptopID` varchar(64) NOT NULL,
+  `Brand` varchar(64) NOT NULL,
+  `FixedOn` varchar(64) NOT NULL,
+  PRIMARY KEY (`LaptopID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 
 -----------------------------------------------------------
  
@@ -118,6 +132,28 @@ INSERT INTO `LaptopBrand` (`id`, `name`) VALUES
 (1, 'Lenovo'),
 (2, 'Dell'),
 (3, 'Samsung');
+
+
+-----------------------------------------------------------
+ 
+--
+-- Table structure for table `TakeHome`
+--
+ 
+DROP TABLE IF EXISTS `TakeHome`;
+CREATE TABLE IF NOT EXISTS `TakeHome` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `answer` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+ 
+--
+-- Dumping data for table `TakeHome`
+--
+ 
+INSERT INTO `TakeHome` (`id`, `answer`) VALUES
+(1, 'Yes'),
+(2, 'No');
 
 
 -----------------------------------------------------------
