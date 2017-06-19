@@ -1,3 +1,4 @@
+
 <?php
 	require_once "config.php";
 	require_once "functions.php";
@@ -14,35 +15,53 @@
     <table>
 
 			<!-- ID Number input field -->
-      <tr><td>Laptop Etch Number/Serial Number</td><td><input type="text" name="jLaptopID" placeholder="Etch Number/Serial Number" ></td></tr>
-			
-<?php
-if(!isset($_GET['kiosk'])){
-	echo "<tr><td>Brand</td><td><select name='Brand'>";
-	echo "<option value='14'>-----</option>";
-	$query = "SELECT name, id FROM LaptopBrand";
-	$resul = mysql_query($query);
-	while ($ro = mysql_fetch_assoc($resul)) {
-		echo "<option value='".$ro['id']."'>".$ro['name']."</option>";
-	}	
-}
-echo "</option>";
-?>
-		<tr><td>Student Name</td><td><input type="text" name="jStudent" placeholder="Student" ></td></tr>
-			
-		<tr><td>Charger Etch Number/Serial Number</td><td><input type="text" name="jChargerID" placeholder="Etch Number/Serial Number" ></td></tr>
-
-<?php
-if(!isset($_GET['kiosk'])){
-	echo "<tr><td>Take Home?</td><td><select name='TakeHome'>";
-	echo "<option value='14'>-----</option>";
-	$query2 = "SELECT answer, id FROM TakeHome";
-	$resul2 = mysql_query($query2);
-	while ($ro2 = mysql_fetch_assoc($resul2)) {
-		echo "<option value='".$ro2['id']."'>".$ro2['answer']."</option>";
-	}	
-}
-echo "</option>";
-?>
+      <tr><td>Etch Number/Serial Number</td><td><input type="search" name="jID" placeholder="Etch Number/Serial Number" ></td></tr>
+	      <tr><td colspan="2" style="text-align:center;"><input type="submit"></td></tr>
+	</div>
 		</table>
 		</form>
+		
+		<?php
+
+	if ($_POST){
+		$ID = str_replace("'","",$_POST['jID']);
+		//make query to add an incident
+		$MainQuery = "SELECT `StudentOwner`, `LaptopID`, `Brand`, `TakeHome`, `GradYear` FROM inventory WHERE `StudentOwner=$ID";
+
+
+	
+		//commence query to add an incident
+		$MainResult = mysql_query($MainQuery);
+
+
+echo var_dump($ID);
+
+while($row = mysql_fetch_array($MainResult)){   //Creates a loop to loop through results
+echo "<tr><td> 
+Student: " . $row['StudentOwner'] . "<br>
+Etch Number: ". $row['LaptopID'] . "<br>";
+echo "Brand: ";
+		if($row['Brand'] ==1){
+				echo "Lenovo<br>";
+				}
+		else if($row['Brand']==2){
+				echo "Dell<br>";
+				}
+		else{
+			echo "Samsung";
+				}
+		
+	echo "Take Home: ";
+	if($row['TakeHome'] ==1){
+				echo "Yes<br>";
+				}
+		else{
+				echo "No<br>";
+				}
+			echo "Graduation Year:  ". $row['GradYear'] . "</td></tr>" ;  //$row['index'] the index here is a field name
+
+}
+	}
+	
+?>
+	</center>

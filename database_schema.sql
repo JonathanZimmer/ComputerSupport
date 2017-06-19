@@ -86,15 +86,22 @@ INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`,
  
 DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE IF NOT EXISTS `inventory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `StudentOwner` varchar(64) NOT NULL,
   `LaptopID` varchar(128) NOT NULL,
   `Brand` varchar(64) NOT NULL,
   `TakeHome` tinyint(1) NOT NULL,
-  `ChargerSerial` varchar(64) NOT NULL,
   `GradYear` int(4) NOT NULL,
-  PRIMARY KEY (`GradYear`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
  
+--
+-- Dumping data for table `LaptopBrand`
+--
+ 
+INSERT INTO `inventory` (`StudentOwner`, `LaptopID`, `Brand`, `TakeHome`, `GradYear`) VALUES
+('Joe', '123', '1', 1, 2018),
+('Charlie', '11', 2, 2, 2018);
 
 -----------------------------------------------------------
 
