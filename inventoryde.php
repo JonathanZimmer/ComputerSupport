@@ -43,7 +43,13 @@
 <?php
 
 	if ($_POST){
-    
+    $StudentOwner = str_replace("'","",$_POST['jStudent']);
+		$LaptopID = str_replace("'","",$_POST['jLaptopID']);
+		$Brand = str_replace("'","",$_POST['Brand']);
+  	$GradYear = str_replace("'","",$_POST['jGradYear']);
+
+
+    $UpdateQuery="UPDATE `inventory` SET `StudentOwner`=$StudentOwner,`LaptopID`=$LaptopID,`Brand`=$Brand,`GradYear`=$GradYear";
 	}
 		
 ?>
