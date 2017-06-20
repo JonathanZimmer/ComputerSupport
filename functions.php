@@ -97,24 +97,7 @@ function promptLogin($isAdmin=0)
 		header('location:/login/login.php?reason=1');die;
 	}
 }//end of prompt login
-function DisplayName()
-{
-	if (isset($_SESSION)){
-		global $g_link, $g_username, $g_password;
-	
-		$g_link = mysql_connect('localhost', $g_username, $g_password); 
-		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
-		$query = "SELECT * FROM students WHERE id = '". $_SESSION['loginid']."' OR id='".$_SESSION['Masquerade']."'";
-		$result = mysql_query($query);
-		while($row = mysql_fetch_assoc($result)){
-			$lookup[$row['id']]=$row['name'];
-		}
-	if(isset($_SESSION['Masquerade'])) {
-		echo $lookup[isset($_SESSION['Masquerade'])] . " pretending to be ";
-	}
-	echo $lookup[$_SESSION['loginid']];
-	}
-}
+
 
 
 	//query function
@@ -126,5 +109,8 @@ function DisplayName()
    	 die('Invalid query: ' . mysql_error());
 		}
 	}
+
+
+
 ?>
  
