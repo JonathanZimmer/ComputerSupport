@@ -32,7 +32,7 @@
 		$ID = str_replace("'","",$_POST['jID']);
 		
 		//make query to search
-		$MainQuery = "SELECT `StudentOwner`, `LaptopID`, `Brand`, `TakeHome`, `GradYear` FROM inventory WHERE `LaptopID` = $ID";
+		$MainQuery = "SELECT `StudentOwner`, `LaptopID`, `Brand`, `GradYear` FROM inventory WHERE `LaptopID` = $ID";
 		
 		//commence query search
 		$MainResult = mysql_query($MainQuery);
@@ -50,15 +50,8 @@
 			else{
 				echo "Samsung";
 			}
-			echo "Take Home: ";
-			if($row['TakeHome'] ==1){
-				echo "Yes<br>";
-			}
-			else{
-				echo "No<br>";
-			}
 			echo "Graduation Year:  ". $row['GradYear'] . "</td></tr>" ;
 		}
-	}	
+	}
 ?>
 </center>
