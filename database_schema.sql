@@ -37,9 +37,8 @@ CREATE TABLE IF NOT EXISTS `incidents` (
   `status` varchar(128) NOT NULL,
   `laptopserial` varchar(64) NOT NULL,
   `chargerserial` varchar(64) NOT NULL,
-  `laptoptaken` tinyint(1) NOT NULL,
-  `chargertaken` tinyint(1) NOT NULL,
-  `newlaptop` tinyint(1) NOT NULL,
+  `laptoptaken` varchar(3) NOT NULL,
+  `chargertaken` varchar(3) NOT NULL,
   `newlaptopserial` varchar(64) NOT NULL,
   `newchargerserial` varchar(64) NOT NULL,
   `explanation` varchar(256) NOT NULL,
@@ -47,7 +46,9 @@ CREATE TABLE IF NOT EXISTS `incidents` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
  
- 
+INSERT INTO `incidents`(`id`, `owner`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptopserial`,`newchargerserial`, `problem`, `receviedby`) VALUES
+(1,'Jimbo', 'LR0343', 'SPARE001', 'Yes', 'No', 'LR0344', '', 'Will not connect to Wi-Fi', 1);
+(2,'Joe', 'LR0344', 'SPARE033', 'No', 'No', '', '', 'Does not turn on', 2);
 -----------------------------------------------------------
  
 --
