@@ -29,7 +29,7 @@
 							Owner of Laptop
 						</td>
 						<td>
-							<input type="text" name="jOwner" placeholder="Owner">
+							<textarea name="jOwner" placeholder="Owner"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -38,8 +38,7 @@
 							Serial Number of Laptop
 						</td>
 						<td>
-							<textarea name="jLaptopNumber" placeholder="Laptop Serial Number" onChange="this.form.jLaptopTaken.selectedIndex=0">
-							</textarea>
+							<textarea name="jLaptopNumber" placeholder="Laptop Serial Number"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -64,8 +63,7 @@
 							Serial Number of new laptop
 						</td>
 						<td>
-							<textarea name="jNewNumber" placeholder="New Serial Number">
-							</textarea>
+							<textarea name="jNewLaptop" placeholder="New Serial Number"></textarea>
 						</td>
 					</tr>
 					<!-- Charger serial input field -->
@@ -74,8 +72,7 @@
 							Serial Number of Charger
 						</td>
 						<td>
-							<textarea name="jChargerNumber" placeholder="Charger Serial Number" onChange="this.form.jChargerTaken.selectedIndex=0">
-							</textarea>
+							<textarea name="jChargerNumber" placeholder="Charger Serial Number"></textarea>
 						</td>
 					</tr>
 					<!-- Charger taken input field -->
@@ -101,8 +98,7 @@
 							Serial Number of new laptop Charger
 						</td>
 						<td>
-							<textarea name="jNewNumberCharger" placeholder="New Charger Serial Number">
-							</textarea>
+							<textarea name="jNewCharger" placeholder="New Charger Serial Number"></textarea>
 						</td>
 					</tr>
 					<!-- Laptop incident input field -->
@@ -111,13 +107,12 @@
 							What's wrong with it?
 						</td>
 						<td>
-							<textarea name="jIssue" placeholder="Problem" onChange="this.form.jLaptopTaken.selectedIndex=0">
-							</textarea>
+							<textarea name="jIssue" placeholder="Problem"></textarea>
 						</td>
 					</tr>
 					<?php
 						if(!isset($_GET['kiosk'])){
-							echo "<tr><td>Who should get the points?</td><td><select name='personid'>";
+							echo "<tr><td>Who recieved it?</td><td><select name='personid'>";
 							echo "<option value='14'>-----</option>";
 							$query = "SELECT name, id FROM students WHERE active=1";
 							$resul = mysql_query($query);
@@ -137,30 +132,37 @@
 				$personid = str_replace("'","",$_POST['personid']);
 				$problem = str_replace("'","",$_POST['jIssue']);
 				//make query to add an incident
-				$queryinsertincident = "INSERT INTO `incidents`
-					(`date`, `owner`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) 
+				$queryinsertincident = "INSERT INTO `incidents` (
+					`date`, `owner`, 
+					`laptopserial`, 
+					`chargerserial`, 
+					`laptoptaken`, 
+					`chargertaken`, 
+					`newlaptop`, 
+					`newlaptopserial`, 
+					`newchargerserial`,
+					`explanation`, 
+					`receviedby`) 
 					VALUES ('"
-					. $_POST['jDate'] ."','"
-					. $_POST['jOwner'] ."','"
+					. $_POST['jDate'] ."','". $_POST['jOwner'] ."','"
 					. $_POST['jLaptopNumber'] ."','"
 					. $_POST['jChargerNumber'] ."', "
 					. $_POST['jLaptopTaken'] .", "
 					. $_POST['jChargerTaken'] .", "
 					. $_POST['jNewLaptop'] .",'"
-					. $_POST['jNewNumber'] . "', '"
-					. $_POST['jNewNumberCharger'] ."', '"
+					. $_POST['jNewCharger'] ."', '"
 					.$problem."', '"
 					.$personid."')";
 					//commence query to add an incident
 					$result = mysql_query($queryinsertincident);
 					//announce if the incident was recorded
 					if(!$result){
-						echo"Incident failed to report";
+						echo"Incident failed to report<br>";
 						die('Invalid query: ' . mysql_error());
 						$fail = "True";
 					}else{}	
 				}// end if laptop taken	
-		mysql_close($conn);
+			mysql_close($conn);
 		?>
 	</div>
 </center>
