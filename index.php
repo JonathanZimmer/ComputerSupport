@@ -45,8 +45,7 @@
 				Serial/Etch Number: ". $row['LaptopID'] . "<br>
 				Brand: ". $row['Brand']. "<br>
 				Graduation Year:  ". $row['GradYear'] . "</td></tr>";
-			}
-		}
+
 	?>
 	</div>
 	<div style="text-align:left">
@@ -228,7 +227,7 @@
 					</tr>
 					<?php
 						if(!isset($_GET['kiosk'])){
-							echo "<tr><td>Who recieved it?</td><td><select name='RecievedBy'>";
+							echo "<tr><td>Who fixed it?</td><td><select name='FixedBy'>";
 							echo "<option value='14'>-----</option>";
 							$query = "SELECT name, id FROM students WHERE active=1";
 							$resul = mysql_query($query);
@@ -242,7 +241,7 @@
 							Date Repaired
 						</td>
 						<td>
-							<input type="date" name="DateRecieved" placeholder="Date" value="<?php echo date(" Y-m-d ");?>">
+							<input type="date" name="DateRepaired" placeholder="Date" value="<?php echo date(" Y-m-d ");?>">
 						</td>
 					</tr>
 				</div>
@@ -253,9 +252,24 @@
 			</form>
 		<?php
 			if ($_POST){
+				$rowcount;
+				$DateRecieved = str_replace("'","",$_POST['DateRecieved']);
 				$RecievedBy = str_replace("'","",$_POST['RecievedBy']);
+				$Problem = str_replace("'","",$_POST['Problem']);
+				$KeyboardReplaced = str_replace("'","",$_POST['KeyboardReplaced']);
+				$BezelReplaced = str_replace("'","",$_POST['BezelReplaced']);
+				$LCDReplaced = str_replace("'","",$_POST['LCDReplaced']);
+				$MotherboardReplaced = str_replace("'","",$_POST['MotherboardReplaced']);
+				$WirelessCardReplaced = str_replace("'","",$_POST['WirelessCardReplaced']);
+				$UnitReplaced = str_replace("'","",$_POST['UnitReplaced']);
+				$FanReplaced = str_replace("'","",$_POST['FanReplaced']);
+				$ScrewsUsed = str_replace("'","",$_POST['ScrewsUsed']);
+				$RepairNotes = str_replace("'","",$_POST['RepairNotes']);
 				$FixedBy= str_replace("'","",$_POST['FixedBy']);
-				$problem = str_replace("'","",$_POST['jIssue']);
+				$DateRepaired = str_replace("'","",$_POST['DateRepaired']);
+				
+
+
 				//make query to add an incident
 				$queryinsertincident = "INSERT INTO `LaptopHistory`(
 				`SerialNumber`, `GradYear`, `owner`, 
@@ -264,18 +278,25 @@
 				`WirelessCardReplaced`, `FanReplaced`, `BezelReplaced`, 
 				`MotherboardReplaced`, `UnitReplaced`, `ScrewsUsed`, 
 				`RepairNotes`, `RepairedBy`, `DateRepaired`) VALUES
-				
-				";
+						('".$ID."', '".$GradYear."', '".$StudentOwner."', 
+						'".$rowcount."', '".$DateRecieved."', '".$RecievedBy."', 
+						'".$Problem."', '".$KeyboardReplaced."', '".$BezelReplaced."', 
+						'".$LCDReplaced."', '".$MotherboardReplaced."', '".$WirelessCardReplaced."', 
+						'".$UnitReplaced."', '".$FanReplaced."', '".$ScrewsUsed."', 
+						'".$RepairNotes."', '".$FixedBy."', '".$DateRepaired."')";
 					//commence query to add an incident
 					$result = mysql_query($queryinsertincident);
 					//announce if the incident was recorded
 					if(!$result){
-						echo"Incident failed to report";
+						echo"Incident failed to report<br>";
 						die('Invalid query: ' . mysql_error());
 						$fail = "True";
 					}else{}
 				}// end if laptop taken	
+			}
 		mysql_close($conn);
+							}
+		
 		?>
 	</div>
 </center>
