@@ -3,6 +3,12 @@
 	require_once "functions.php";
 	$conn = mysql_connect("localhost", $g_username, $g_password);
 	mysql_select_db('stt', $conn);
+	$sql="SELECT id FROM LaptopHistory ORDER BY id";
+	if ($result=mysql_query($sql,$conn)){
+ 		// Return the number of rows in result set
+		$rowcount=mysql_num_rows($result);
+	}
+	$rowcount=$rowcount+1;
 ?>
 <center>
 	<div class="centeringDiv">
@@ -28,7 +34,6 @@
 					</tr>
 			</table>
 		</form>
-	</div>
 	<?php
 		if ($_POST){
 			$ID = str_replace("'","",$_POST['jID']);
@@ -43,7 +48,8 @@
 			}
 		}
 	?>
-	<div class="centeringDiv">
+	</div>
+	<div style="text-align:left">
 		<h2>
 			Incident Report
 		</h2>
@@ -52,102 +58,26 @@
 					<!-- Date Recieved input field -->
 					<tr>
 						<td>
+							Incident Number
+						</td>
+						<td>
 							Date Recieved
 						</td>
 						<td>
-							<input type="date" name="jDate" placeholder="Date" value="<?php echo date(" Y-m-d ");?>">
+							Problem
 						</td>
 					</tr>
 					<tr>
-						<!-- Owner input field -->
 						<td>
-							Owner of Laptop
+							<?php
+								echo $rowcount;
+							?>
 						</td>
 						<td>
-							<input type="text" name="jOwner" placeholder="Owner">
-						</td>
-					</tr>
-					<tr>
-						<!-- Laptop serial input field -->
-						<td>
-							Serial Number of Laptop
+							<input type="date" name="DateRecieved" placeholder="Date" value="<?php echo date(" Y-m-d ");?>">
 						</td>
 						<td>
-							<textarea name="jLaptopNumber" placeholder="Laptop Serial Number" onChange="this.form.jLaptopTaken.selectedIndex=0">
-							</textarea>
-						</td>
-					</tr>
-					<tr>
-						<!-- Laptop taken input field -->
-						<td>
-							Laptop taken from student?
-						</td>
-						<td>
-							<select name="jLaptopTaken" onChange="document.getElementById('lserialrow').style='display: table-row'">
-								<option value="1">
-									Yes
-								</option>
-								<option value="2" selected>
-									No
-								</option>
-							</select>
-						</td>
-					</tr>
-					<!-- New Laptop Serial Number input field -->
-					<tr id=lserialrow style="display:none">
-						<td>
-							Serial Number of new laptop
-						</td>
-						<td>
-							<textarea name="jNewNumber" placeholder="New Serial Number">
-							</textarea>
-						</td>
-					</tr>
-					<!-- Charger serial input field -->
-					<tr>
-						<td>
-							Serial Number of Charger
-						</td>
-						<td>
-							<textarea name="jChargerNumber" placeholder="Charger Serial Number" onChange="this.form.jChargerTaken.selectedIndex=0">
-							</textarea>
-						</td>
-					</tr>
-					<!-- Charger taken input field -->
-					<tr>
-						<td>
-							Charger taken from student?
-						</td>
-						<td>
-							<select name="jChargerTaken" onChange="document.getElementById('cserialrow').style='display: table-row'">
-								<!-- replace options with a query later -->
-								<option value="1">
-									Yes
-								</option>
-								<option value="2" selected>
-									No
-								</option>
-							</select>
-						</td>
-					</tr>
-					<!-- Serial Number input field -->
-					<tr id=cserialrow style="display:none">
-						<td>
-							Serial Number of new laptop Charger
-						</td>
-						<td>
-							<textarea name="jNewNumberCharger" placeholder="New Charger Serial Number">
-							</textarea>
-						</td>
-					</tr>
-					<!-- Laptop incident input field -->
-					<tr>
-						<td>
-							What's wrong with it?
-						</td>
-						<td>
-							<textarea name="jIssue" placeholder="Problem" onChange="this.form.jLaptopTaken.selectedIndex=0">
-							</textarea>
+							<textarea name="Problem" placeholder="Problem"></textarea>
 						</td>
 					</tr>
 					<?php
@@ -160,8 +90,145 @@
 								echo "<option value='".$ro['id']."'>".$ro['name']."</option>";
 							}
 						}
+					?>
+					<tr>
+						<td>
+							Were these parts used?
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Keyboard
+						</td>
+						<td>
+							<select name="KeyboardReplaced">
+								<option value="Yes">
+									Yes
+								</option>
+								<option value="No" selected>
+									No
+								</option>
+							</select>
+						</td>
+						<td>
+							Bezel
+						</td>
+						<td>
+							<select name="BezelReplaced">
+								<option value="Yes">
+									Yes
+								</option>
+								<option value="No" selected>
+									No
+								</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							LCD
+						</td>
+						<td>
+							<select name="LCDReplaced">
+								<option value="Yes">
+									Yes
+								</option>
+								<option value="No" selected>
+									No
+								</option>
+							</select>
+						</td>
+						<td>
+							Motherboard
+						</td>
+						<td>
+							<select name="MotherboardReplaced">
+								<option value="Yes">
+									Yes
+								</option>
+								<option value="No" selected>
+									No
+								</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Wireless Card
+						</td>
+						<td>
+							<select name="WirelessCardReplaced">
+								<option value="Yes">
+									Yes
+								</option>
+								<option value="No" selected>
+									No
+								</option>
+							</select>
+						</td>
+						<td>
+							Unit itself
+						</td>
+						<td>
+							<select name="UnitReplaced">
+								<option value="Yes">
+									Yes
+								</option>
+								<option value="No" selected>
+									No
+								</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Fan
+						</td>
+						<td>
+							<select name="FanReplaced">
+								<option value="Yes">
+									Yes
+								</option>
+								<option value="No" selected>
+									No
+								</option>
+							</select>
+						</td>
+						<td>
+							Screws
+						</td>
+						<td>
+							<select name="ScrewsUsed">
+								<option value="Yes">
+									Yes
+								</option>
+								<option value="No" selected>
+									No
+								</option>
+							</select>
+						</td>
+					</tr>
+				</div>
+				<div style="text-align:right">
+					<tr>
+						<td>
+							<h2>
+								<br>
+								Repair Process
+							</h2>
+						</td>
+					</tr>
+					<tr>
+						<td >
+							Repair Notes
+						</td>
+						<td>
+							<textarea name="RepairNotes" placeholder="Repair Notes"></textarea>
+						</td>
+					</tr>
+					<?php
 						if(!isset($_GET['kiosk'])){
-							echo "<tr><td>Who fixed it?</td><td><select name='FixedBy'>";
+							echo "<tr><td>Who recieved it?</td><td><select name='RecievedBy'>";
 							echo "<option value='14'>-----</option>";
 							$query = "SELECT name, id FROM students WHERE active=1";
 							$resul = mysql_query($query);
@@ -169,8 +236,16 @@
 								echo "<option value='".$ro['id']."'>".$ro['name']."</option>";
 							}
 						}
-						echo "</option>";
 					?>
+					<tr>
+						<td>
+							Date Repaired
+						</td>
+						<td>
+							<input type="date" name="DateRecieved" placeholder="Date" value="<?php echo date(" Y-m-d ");?>">
+						</td>
+					</tr>
+				</div>
 					<tr>
 						<td colspan="2" style="text-align:center;"><input type="submit"></td>
 					</tr>
@@ -185,9 +260,9 @@
 				$queryinsertincident = "INSERT INTO `LaptopHistory`(
 				`SerialNumber`, `GradYear`, `owner`, 
 				`id`, `DateRecieved`, `RecievedBy`, 
-				`Problem`, `KeyboardReplaced`, `DisplayCordReplaced`, 
+				`Problem`, `KeyboardReplaced`, `LCDReplaced`, 
 				`WirelessCardReplaced`, `FanReplaced`, `BezelReplaced`, 
-				`MotherBoardReplaced`, `UnitReplaced`, `ScrewsUsed`, 
+				`MotherboardReplaced`, `UnitReplaced`, `ScrewsUsed`, 
 				`RepairNotes`, `RepairedBy`, `DateRepaired`) VALUES
 				
 				";
@@ -198,7 +273,7 @@
 						echo"Incident failed to report";
 						die('Invalid query: ' . mysql_error());
 						$fail = "True";
-					}else{}	
+					}else{}
 				}// end if laptop taken	
 		mysql_close($conn);
 		?>

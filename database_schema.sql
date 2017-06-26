@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `LaptopHistory` (
   `RecievedBy` int(3) NOT NULL,
   `Problem` varchar(128) NOT NULL,
   `KeyboardReplaced` varchar(3) NOT NULL,
-  `DisplayCordReplaced` varchar(3) NOT NULL,
+  `LCDReplaced` varchar(3) NOT NULL,
   `WirelessCardReplaced` varchar(3) NOT NULL,
   `FanReplaced` varchar(3) NOT NULL,
   `BezelReplaced` varchar(3) NOT NULL,
