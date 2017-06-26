@@ -29,26 +29,30 @@ USE `stt`;
 -- Table structure for table `incidents`
 --
  
-DROP TABLE IF EXISTS `incidents`;
-CREATE TABLE IF NOT EXISTS `incidents` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` date NOT NULL,
+DROP TABLE IF EXISTS `LaptopHistory`;
+CREATE TABLE IF NOT EXISTS `LaptopHistory` (
+  `SerialNumber` varchar(20) NOT NULL,
+  `GradYear` varchar(4) NOT NULL,
   `owner` varchar(64) NOT NULL,
-  `status` varchar(128) NOT NULL,
-  `laptopserial` varchar(64) NOT NULL,
-  `chargerserial` varchar(64) NOT NULL,
-  `laptoptaken` varchar(3) NOT NULL,
-  `chargertaken` varchar(3) NOT NULL,
-  `newlaptopserial` varchar(64) NOT NULL,
-  `newchargerserial` varchar(64) NOT NULL,
-  `explanation` varchar(256) NOT NULL,
-  `receviedby` int(11) NOT NULL,
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `DateRecieved` date NOT NULL,
+  `RecievedBy` int(3) NOT NULL,
+  `Problem` varchar(128) NOT NULL,
+  `KeyboardReplaced` varchar(3) NOT NULL,
+  `DisplayCordReplaced` varchar(3) NOT NULL,
+  `WirelessCardReplaced` varchar(3) NOT NULL,
+  `FanReplaced` varchar(3) NOT NULL,
+  `BezelReplaced` varchar(3) NOT NULL,
+  `MotherBoardReplaced` varchar(3) NOT NULL,
+  `UnitReplaced` varchar(3) NOT NULL,
+  `ScrewsUsed` varchar(3) NOT NULL,
+  `RepairNotes` varchar(256) NOT NULL,
+  `RepairedBy` int(3) NOT NULL,
+  `DateRepaired` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
- 
-INSERT INTO `incidents`(`id`, `owner`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptopserial`,`newchargerserial`, `problem`, `receviedby`) VALUES
-(1,'Jimbo', 'LR0343', 'SPARE001', 'Yes', 'No', 'LR0344', '', 'Will not connect to Wi-Fi', 1);
-(2,'Joe', 'LR0344', 'SPARE033', 'No', 'No', '', '', 'Does not turn on', 2);
+
+
 -----------------------------------------------------------
  
 --
@@ -91,7 +95,6 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `StudentOwner` varchar(64) NOT NULL,
   `LaptopID` varchar(128) NOT NULL,
   `Brand` varchar(64) NOT NULL,
-  `TakeHome` tinyint(1) NOT NULL,
   `GradYear` int(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -100,69 +103,9 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 -- Dumping data for table `LaptopBrand`
 --
  
-INSERT INTO `inventory` (`StudentOwner`, `LaptopID`, `Brand`, `TakeHome`, `GradYear`) VALUES
-('Joe', '123', '1', 1, 2018),
-('Charlie', '11', 2, 2, 2018);
-
------------------------------------------------------------
-
---
--- Table structure for table `LaptopHistory`
---
- 
-DROP TABLE IF EXISTS `LaptopHistory`;
-CREATE TABLE IF NOT EXISTS `LaptopHistory` (
-  `LaptopID` varchar(64) NOT NULL,
-  `Brand` varchar(64) NOT NULL,
-  `FixedOn` varchar(64) NOT NULL,
-  PRIMARY KEY (`LaptopID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-
------------------------------------------------------------
- 
---
--- Table structure for table `LaptopBrand`
---
- 
-DROP TABLE IF EXISTS `LaptopBrand`;
-CREATE TABLE IF NOT EXISTS `LaptopBrand` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(40) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
- 
---
--- Dumping data for table `LaptopBrand`
---
- 
-INSERT INTO `LaptopBrand` (`id`, `name`) VALUES
-(1, 'Lenovo'),
-(2, 'Dell'),
-(3, 'Samsung');
-
-
------------------------------------------------------------
- 
---
--- Table structure for table `TakeHome`
---
- 
-DROP TABLE IF EXISTS `TakeHome`;
-CREATE TABLE IF NOT EXISTS `TakeHome` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `answer` varchar(40) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
- 
---
--- Dumping data for table `TakeHome`
---
- 
-INSERT INTO `TakeHome` (`id`, `answer`) VALUES
-(1, 'Yes'),
-(2, 'No');
-
+INSERT INTO `inventory` (`StudentOwner`, `LaptopID`, `Brand`, `GradYear`) VALUES
+('Joe', '123', 'Lenovo n21', 2018),
+('Charlie', '11', 'Dell', 2018);
 
 -----------------------------------------------------------
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
