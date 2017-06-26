@@ -11,26 +11,22 @@
 		<h2>
 			Add to Inventory
 		</h2>
-		<form method="post" name="postIt">
-			<table>
-				<!-- Owner input field -->
-				<tr>
-					<td>
-						Student
-					</td>
-					<td>
-						<textarea name="jStudent" placeholder="Student">
-						</textarea>
-					</td>
-				</tr>
-				<!-- Laptop serial input field -->
-				<tr>
-					<td>
-						Serial/Etch Number of Laptop
-					</td>
+			<form method="post" name="postIt">
+				<table>
+					<tr>
 						<td>
-							<textarea name="jLaptopID" placeholder="Laptop Serial/Etch Number">
-							</textarea>
+							Student
+						</td>
+						<td>
+							<textarea name="jStudent" placeholder="Student"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Serial/Etch Number of Laptop
+						</td>
+						<td>
+							<textarea name="jLaptopID" placeholder="Laptop Serial/Etch Number"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -38,8 +34,7 @@
 							Laptop Brand/Model
 						</td>
 						<td>
-							<textarea name="jBrandModel" placeholder="Brand/Model">
-							</textarea>
+							<textarea name="jBrandModel" placeholder="Brand/Model"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -47,8 +42,7 @@
 							Graduation Year of Student
 						</td>
 						<td>
-							<textarea name="jGradYear" placeholder="Graduation Year">
-							</textarea>
+							<textarea name="jGradYear" placeholder="Graduation Year"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -62,22 +56,53 @@
 			if ($_POST){
 				$StudentOwner = str_replace("'","",$_POST['jStudent']);
 				$LaptopID = str_replace("'","",$_POST['jLaptopID']);
-				$Brand=str_replace($_POST['jBrandModel']);
 				$GradYear = str_replace("'","",$_POST['jGradYear']);
-				$DeleteQuery="DELETE FROM `inventory` WHERE `LaptopID='$LaptopID'";
-				$InsertQuery="INSERT INTO `inventory`(`StudentOwner`, `LaptopID`, `Brand`, `GradYear`) VALUES 
-				('".$StudentOwner."', '".$LaptopID."', '".$Brand."', '".$GradYear."')";
-				//commence query to update inventory
-				$result2=mysql_query($DeleteQuery);
-				$result = mysql_query($InsertQuery);
-				//announce if the incident was recorded
-				if(!$result){
-					echo"Inventory failed to update";
-					die('Invalid query: ' . mysql_error());
-					$fail = "True";
+				$result = mysql_query("SELECT COUNT(*) FROM `inventory` WHERE `LaptopID` = $LaptopID");
+				if (!$result) {
+					die(mysql_error());
 				}
 				else{
-					echo "Inventory updated";
+					"<br>";
+				}
+				if (mysql_result($result, 0, 0) > 0) {
+					$UpdateQuery = "UPDATE `inventory` SET `StudentOwner`='$StudentOwner', `GradYear`='$GradYear' WHERE `LaptopID`='$LaptopID'";
+					if(mysql_query($UpdateQuery,$conn)){} 
+					else {
+						echo "ERROR: Could not able to execute $UpdateQuery. " . mysql_error($conn);
+					}
+					if ($_POST){
+						$MainQuery = "SELECT `StudentOwner`, `LaptopID`, `Brand`, `GradYear` FROM inventory WHERE `LaptopID` = $LaptopID";
+						$MainResult = mysql_query($MainQuery);
+						while($row = mysql_fetch_array($MainResult)){   //Creates a loop to loop through results
+							echo "<br><tr><td>
+							Student: " . $row['StudentOwner'] . "<br>
+							Serial/Etch Number: ". $LaptopID . "<br>
+							Brand: ". $row['Brand']. "<br>
+							Graduation Year:  ". $row['GradYear'] . "</td></tr>";
+						}
+					}	
+				} 
+				else {
+					$InsertQuery="INSERT INTO `inventory`(`StudentOwner`, `LaptopID`, `Brand`, `GradYear`) VALUES 
+					('".$StudentOwner."', '".$LaptopID."', '".$Brand."', '".$GradYear."')";
+					$result = mysql_query($InsertQuery);
+				if(!$result){
+					echo(mysql_error());
+					die(mysql_error());
+				}
+				else{
+					if ($_POST){
+						$MainQuery = "SELECT `StudentOwner`, `LaptopID`, `Brand`, `GradYear` FROM inventory WHERE `LaptopID` = $LaptopID";
+						$MainResult = mysql_query($MainQuery);
+							while($row = mysql_fetch_array($MainResult)){   //Creates a loop to loop through results
+								echo "<tr><td>
+								Student: " . $row['StudentOwner'] . "<br>
+								Serial/Etch Number: ". $LaptopID . "<br>
+								Brand: ". $row['Brand']. "<br>
+								Graduation Year:  ". $row['GradYear'] . "</td></tr>";
+							}
+						}
+					}
 				}
 				mysql_close($conn);
 				$_POST['jStudent'] = "";
@@ -85,7 +110,6 @@
 				$_POST['jBrand'] = "";
 				$_POST['jGradYear'] = "";
 			}
-			die;
 		?>
 	</div>
 </center>
