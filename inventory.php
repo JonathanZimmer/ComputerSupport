@@ -16,7 +16,7 @@
 							Etch Number/Serial Number
 						</td>
 						<td>
-							<input type="search" name="jID" placeholder="Etch Number/Serial Number" >
+							<textarea name="jID" placeholder="Etch Number/Serial Number"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -39,18 +39,17 @@
 		while($row = mysql_fetch_array($MainResult)){   //Creates a loop to loop through results
 			echo "<tr><td> 
 			Student: " . $row['StudentOwner'] . "<br>
-			Serial/Etch Number: ". $row['LaptopID'] . "<br>";
-			echo "Brand: ";
-			if($row['Brand'] ==1){
-				echo "Lenovo<br>";
-			}
-			else if($row['Brand']==2){
-				echo "Dell<br>";
-			}
-			else{
-				echo "Samsung";
-			}
-			echo "Graduation Year:  ". $row['GradYear'] . "</td></tr>" ;
+			Serial/Etch Number: ". $row['LaptopID'] . "<br>
+			Brand: ". $row['Brand'] . "<br>
+			Graduation Year: ".$row['GradYear'] . "<br></td></tr>";
+			$Student=$row['StudentOwner'];
+			$EtchNumber=$row['LaptopID'];
+			$Brand=$row['Brand'];
+			$GradYear=$row['GradYear'];
+			echo $Student,"<br>";
+			echo $EtchNumber,"<br>";
+			echo $Brand,"<br>";
+			echo $GradYear,"<br>";
 		}
 	}
 ?>

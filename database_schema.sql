@@ -31,10 +31,10 @@ USE `stt`;
  
 DROP TABLE IF EXISTS `LaptopHistory`;
 CREATE TABLE IF NOT EXISTS `LaptopHistory` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
   `SerialNumber` varchar(20) NOT NULL,
   `GradYear` varchar(4) NOT NULL,
   `owner` varchar(64) NOT NULL,
-  `id` int(3) NOT NULL AUTO_INCREMENT,
   `DateRecieved` date NOT NULL,
   `RecievedBy` int(3) NOT NULL,
   `Problem` varchar(128) NOT NULL,
