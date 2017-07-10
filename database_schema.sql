@@ -98,9 +98,9 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 -- Dumping data for table `LaptopBrand`
 --
  
-INSERT INTO `inventory` (`StudentOwner`, `LaptopID`, `Brand`, `GradYear`) VALUES
-('Joe', '123', 'Lenovo n21', 2018),
-('Charlie', '11', 'Dell', 2018);
+/* INSERT INTO `inventory` (`StudentOwner`, `LaptopID`, `Brand`, `GradYear`) VALUES 
+ ('Joe', '123', 'Lenovo n21', 2018), 
+ ('Charlie', '11', 'Dell', 2018); */
 
 -----------------------------------------------------------
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
