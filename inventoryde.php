@@ -5,6 +5,7 @@
 	$conn = mysql_connect("localhost", $g_username, $g_password);
 	//access correct database
 	mysql_select_db('stt', $conn);
+	promptLogin(1);
 ?>
 <center>
 	<div class="centeringDiv">
@@ -57,6 +58,7 @@
 				$StudentOwner = str_replace("'","",$_POST['jStudent']);
 				$LaptopID = str_replace("'","",$_POST['jLaptopID']);
 				$GradYear = str_replace("'","",$_POST['jGradYear']);
+				$Brand = str_replace("'","",$_POST['jBrandModel']);
 				$result = mysql_query("SELECT COUNT(*) FROM `inventory` WHERE `LaptopID` = $LaptopID");
 				if (!$result) {
 					die(mysql_error());

@@ -42,14 +42,6 @@
 			Serial/Etch Number: ". $row['LaptopID'] . "<br>
 			Brand: ". $row['Brand'] . "<br>
 			Graduation Year: ".$row['GradYear'] . "<br></td></tr>";
-			$Student=$row['StudentOwner'];
-			$EtchNumber=$row['LaptopID'];
-			$Brand=$row['Brand'];
-			$GradYear=$row['GradYear'];
-			echo $Student,"<br>";
-			echo $EtchNumber,"<br>";
-			echo $Brand,"<br>";
-			echo $GradYear,"<br>";
 		}
 	}
 ?>

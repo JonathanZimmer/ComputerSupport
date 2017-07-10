@@ -17,7 +17,7 @@
 				Incident Report
 			</h2>
 			<br>
-			<br>
+
 			<table>
 					<tr>
 						<td>
@@ -30,25 +30,21 @@
 			</table>
 			<table>
 					<tr>
-						<br>
-						<td>
-							<br>
+						<td style="text-align:center;">
 							<br>
 							Incident Number
 						</td>
 						<td>
 							<br>
-							<br>
 							Date Recieved
 						</td>
-						<td>
-							<br>
+						<td style="text-align:center;">
 							<br>
 							Problem
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td style="text-align:center;">
 							<?php
 								echo $rowcount;
 							?>
@@ -60,6 +56,10 @@
 							<textarea name="Problem" placeholder="Problem"></textarea>
 						</td>
 					</tr>
+			</table>
+			<br>
+			<table>
+				
 					<?php
 						if(!isset($_GET['kiosk'])){
 							echo "<tr><td>Who recieved it?</td><td><select name='RecievedBy'>";
@@ -67,35 +67,38 @@
 							$query = "SELECT name, id FROM students WHERE active=1";
 							$resul = mysql_query($query);
 							while ($ro = mysql_fetch_assoc($resul)) {
-								echo "<option value='".$ro['id']."'>".$ro['name']."</option>";
+								echo "<option value='".$ro['id']."'>".$ro['name']."</option><br>";
 							}
 						}
 					?>
 					<tr>
 						<td>
+							<br>
 							Were these parts used?
 						</td>
 					</tr>
-					<tr>
-						<td>
-							Keyboard
-						</td>
-						<td>
-							<select name="KeyboardReplaced">
-								<option value="Yes">
-									Yes
-								</option>
-								<option value="No" selected>
-									No
-								</option>
-							</select>
-						</td>
-						<td>
-							Bezel
-						</td>
-						<td>
-							<select name="BezelReplaced">
-								<option value="Yes">
+			</table>
+			<table>
+				<tr>
+					<td>
+						Keyboard
+					</td>
+					<td>
+						<select name="KeyboardReplaced">
+							<option value="Yes">
+								Yes
+							</option>
+							<option value="No" selected>
+								No
+							</option>
+						</select>
+					</td>
+					<td>
+						Bezel
+					</td>
+					<td>
+						<select name="BezelReplaced">
+							<option value="Yes">
 									Yes
 								</option>
 								<option value="No" selected>
@@ -190,16 +193,16 @@
 					</tr>
 				</div>
 		</table>
-		<table>
+			<tr>
+				<td>
+					<h2>
+						<br>
+						Repair Process
+						</h2>
+					</td>
+				</tr>
+			<table>
 				<div style="text-align:center">
-					<tr>
-						<td>
-							<h2>
-								<br>
-								Repair Process
-							</h2>
-						</td>
-					</tr>
 					<tr>
 						<td>
 							Repair Notes
@@ -268,18 +271,19 @@
 				
 				//make query to add an incident
 				$queryinsertincident = "INSERT INTO `LaptopHistory`(
-				`SerialNumber`, `GradYear`, `owner`, 
+				`LaptopID`, `GradYear`, `StudentOwner`, 
 				`id`, `DateRecieved`, `RecievedBy`, 
 				`Problem`, `KeyboardReplaced`, `LCDReplaced`, 
 				`WirelessCardReplaced`, `FanReplaced`, `BezelReplaced`, 
 				`MotherboardReplaced`, `UnitReplaced`, `ScrewsUsed`, 
 				`RepairNotes`, `RepairedBy`, `DateRepaired`) VALUES
-						('".$ID."', '".$GradYear."', '".$StudentOwner."', 
-						'".$rowcount."', '".$DateRecieved."', '".$RecievedBy."', 
-						'".$Problem."', '".$KeyboardReplaced."', '".$BezelReplaced."', 
-						'".$LCDReplaced."', '".$MotherboardReplaced."', '".$WirelessCardReplaced."', 
-						'".$UnitReplaced."', '".$FanReplaced."', '".$ScrewsUsed."', 
-						'".$RepairNotes."', '".$FixedBy."', '".$DateRepaired."')";
+						('"
+					.$ID."', '".$GradYear."', '".$StudentOwner."', '"
+					.$rowcount."', '".$DateRecieved."', '".$RecievedBy."', '"
+					.$Problem."', '".$KeyboardReplaced."', '".$LCDReplaced."', '"
+					.$WirelessCardReplaced."', '".$FanReplaced."', '".$BezelReplaced."', '"
+					.$MotherboardReplaced."', '".$UnitReplaced."', '".$ScrewsUsed."', '"
+					.$RepairNotes."', '".$FixedBy."', '".$DateRepaired."')";
 	
 
 

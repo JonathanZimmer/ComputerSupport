@@ -32,9 +32,9 @@ USE `stt`;
 DROP TABLE IF EXISTS `LaptopHistory`;
 CREATE TABLE IF NOT EXISTS `LaptopHistory` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
-  `SerialNumber` varchar(20) NOT NULL,
+  `LaptopID` varchar(20) NOT NULL,
   `GradYear` varchar(4) NOT NULL,
-  `owner` varchar(64) NOT NULL,
+  `StudentOwner` varchar(64) NOT NULL,
   `DateRecieved` date NOT NULL,
   `RecievedBy` int(3) NOT NULL,
   `Problem` varchar(128) NOT NULL,
@@ -65,7 +65,6 @@ CREATE TABLE IF NOT EXISTS `students` (
   `username` varchar(32) NOT NULL,
   `password` varchar(64) NOT NULL,
   `name` varchar(40) NOT NULL,
-  `class` varchar(4) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -75,12 +74,8 @@ CREATE TABLE IF NOT EXISTS `students` (
 -- Dumping data for table `students`
 --
  
-INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`, `admin`) VALUES
-(1, 'student1', 'student1', 'Student 1', '2001', 1, 0),
-(2, 'student2', 'student2', 'Student 2', '2002', 1, 0),
-(3, 'student3', 'student3', 'Student 3', '2004', 1, 0),
-(9, 'steavie', 'steavie', 'Steavie', '2020', 1, 0),
-(14, 'admin', 'admin', 'Admin', '2000', 1, 1);
+INSERT INTO `students` (`id`, `username`, `password`, `name`, `active`, `admin`) VALUES
+(1, 'admin', '$2a$10$E0hKDlY5A7HrmatD9vcSMeO8opsr.C.ZVV5j9fxCrldmq/TZGmbZC', 'Admin', 1, 1);
  
  
 -----------------------------------------------------------
