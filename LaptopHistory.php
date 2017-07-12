@@ -11,12 +11,30 @@
 		</h2>
 		<form method="post" name="postIt">
 			<table>
+				<tr>
+					<td>
+						Grade or Person?
+					</td>
+					<td>
+						<select name="Selecter">
+							<option value="Grade">
+								Full class
+							</option>
+							<option value="Person">
+								Single person
+							</option>
+							<option value="------" selected>
+								--------
+							</option>
+						</select>
+					</td>
+				</tr>
 					<tr>
 						<td>
-							Etch Number/Serial Number
+							Lookup ID
 						</td>
 						<td>
-							<textarea name="jID" placeholder="Etch Number/Serial Number"></textarea>
+							<textarea name="jID" placeholder="Lookup ID"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -30,7 +48,9 @@
 <?php
 	if ($_POST){
 		$ID = str_replace("'","",$_POST['jID']);
+		$selector=str_replace("'","",$_POST['Selecter']);
 		
+		if ($selector=="Person") {
 		//make query to search
 		$MainQuery = "SELECT `StudentOwner`, `DateRecieved`, `KeyboardReplaced`, 
     `LCDReplaced`, `WirelessCardReplaced`, `FanReplaced`, 
@@ -82,7 +102,56 @@
       echo "Laptop ID ".$ID." hasn't been in for repairs";
     }
 	}
-	$handle= printer_open("Tech Room Printer");
-	$handle=printer_open();
+//	$handle= printer_open("Tech Room Printer");
+//	$handle=printer_open();
+	
+	else if ($selector=="Grade"){
+		$GradeQuery= "SELECT * FROM LaptopHistory WHERE GradYear=$ID";
+		$count = mysql_query("SELECT COUNT(*) FROM `LaptopHistory` WHERE `GradYear` = $ID");
+				if (!$count) {
+					die(mysql_error());
+				}
+				else{
+					"<br>";
+				}
+		if (mysql_result($count, 0, 0) > 0) {
+		$GradeResult = mysql_query($GradeQuery);
+		while($row2 = mysql_fetch_array($GradeResult)){   //Creates a loop to loop through results
+			echo "<tr><td> 
+			Student: " . $row2['StudentOwner'] . "<br>
+			Date Recieved: ". $row2['DateRecieved'] . "<br>";
+			if($row2['KeyboardReplaced'] =='Yes'){
+				echo "Keyboard has been replaced<br>";
+			}
+			if($row2['LCDReplaced'] =='Yes'){
+				echo "LCD has been replaced<br>";
+			}
+			if($row2['WirelessCardReplaced'] =='Yes'){
+				echo "Wireless card has been replaced<br>";
+			}
+			if($row2['FanReplaced'] =='Yes'){
+				echo "Fan has been replaced<br>";
+			}
+			if($row2['BezelReplaced'] =='Yes'){
+				echo "Bezel has been replaced<br>";
+			}
+			if($row2['MotherBoardReplaced'] =='Yes'){
+				echo "Motherboard has been replaced<br>";
+			}
+			if($row2['UnitReplaced'] =='Yes'){
+				echo "Unit has been replaced<br>";
+			}
+		}
+		}
+		else{
+			echo "No students graduating in " .$ID." have had their computers in";
+		}
+		echo "<br>";
+		
+	}
+		else{
+			echo "You failed to select anything";
+		}
+	}
 ?>
 </center>

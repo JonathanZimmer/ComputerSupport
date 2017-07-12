@@ -16,15 +16,21 @@
 			<h2>
 				Incident Report
 			</h2>
-			<br>
-
-			<table>
+				<table>
 					<tr>
 						<td>
 							Etch Number/Serial Number
 						</td>
 						<td>
 							<textarea name="jID" placeholder="Etch Number/Serial Number"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Graduation Year of Student
+						</td>
+						<td>
+							<textarea name="jGradYear" placeholder="Graduation Year"></textarea>
 						</td>
 					</tr>
 			</table>
@@ -59,7 +65,6 @@
 			</table>
 			<br>
 			<table>
-				
 					<?php
 						if(!isset($_GET['kiosk'])){
 							echo "<tr><td>Who recieved it?</td><td><select name='RecievedBy'>";
@@ -196,7 +201,6 @@
 			<tr>
 				<td>
 					<h2>
-						<br>
 						Repair Process
 						</h2>
 					</td>
@@ -211,7 +215,6 @@
 							<textarea name="RepairNotes" placeholder="Repair Notes"></textarea>
 						</td>
 					</tr>
-					<br>
 					<?php
 						if(!isset($_GET['kiosk'])){
 							echo "<tr><td>Who fixed it?</td><td><select name='FixedBy'>";
@@ -268,6 +271,7 @@
 				$RepairNotes=str_replace("'","",$_POST['RepairNotes']);
 				$FixedBy=str_replace("'","",$_POST['FixedBy']);
 				$DateRepaired=str_replace("'","",$_POST['DateRepaired']);
+				$GradYear=str_replace("'","",$_POST['jGradYear']);
 				
 				//make query to add an incident
 				$queryinsertincident = "INSERT INTO `LaptopHistory`(
@@ -284,13 +288,6 @@
 					.$WirelessCardReplaced."', '".$FanReplaced."', '".$BezelReplaced."', '"
 					.$MotherboardReplaced."', '".$UnitReplaced."', '".$ScrewsUsed."', '"
 					.$RepairNotes."', '".$FixedBy."', '".$DateRepaired."')";
-	
-
-
-
-
-
-				
 				
 				//commence query to add an incident
 					$result = mysql_query($queryinsertincident);
