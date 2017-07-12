@@ -23,6 +23,9 @@
 							<option value="Person">
 								Single person
 							</option>
+							<option value="Everyone">
+								Everyone
+							</option>
 							<option value="------" selected>
 								--------
 							</option>
@@ -55,7 +58,7 @@
 		$MainQuery = "SELECT `StudentOwner`, `DateRecieved`, `KeyboardReplaced`, 
     `LCDReplaced`, `WirelessCardReplaced`, `FanReplaced`, 
     `BezelReplaced`, `MotherBoardReplaced`, `UnitReplaced`, 
-    `RepairNotes`, `LaptopID` FROM `LaptopHistory` WHERE `LaptopID` = $ID";
+    `RepairNotes`, `LaptopID`, `GradYear` FROM `LaptopHistory` WHERE `LaptopID` = $ID";
     
     
     
@@ -74,6 +77,7 @@
 		while($row = mysql_fetch_array($MainResult)){   //Creates a loop to loop through results
 			echo "<tr><td> 
 			Student: " . $row['StudentOwner'] . "<br>
+			Graduation Year: ".$row['GradYear']. "<br>
 			Date Recieved: ". $row['DateRecieved'] . "<br>";
 			if($row['KeyboardReplaced'] =='Yes'){
 				echo "Keyboard has been replaced<br>";
@@ -145,6 +149,50 @@
 		}
 		else{
 			echo "No students graduating in " .$ID." have had their computers in";
+		}
+		echo "<br>";
+		
+	}
+			else if ($selector=="Everyone"){
+		$Everyone= "SELECT * FROM LaptopHistory";
+		$All = mysql_query("SELECT COUNT(*) FROM `LaptopHistory`");
+				if (!$All) {
+					die(mysql_error());
+				}
+				else{
+					"<br>";
+				}
+		if (mysql_result($All, 0, 0) > 0) {
+		$AllResult = mysql_query($Everyone);
+		while($row3 = mysql_fetch_array($AllResult)){   //Creates a loop to loop through results
+			echo "<tr><td> 
+			Student: " . $row3['StudentOwner'] . "<br>
+			Date Recieved: ". $row3['DateRecieved'] . "<br>";
+			if($row3['KeyboardReplaced'] =='Yes'){
+				echo "Keyboard has been replaced<br>";
+			}
+			if($row3['LCDReplaced'] =='Yes'){
+				echo "LCD has been replaced<br>";
+			}
+			if($row3['WirelessCardReplaced'] =='Yes'){
+				echo "Wireless card has been replaced<br>";
+			}
+			if($row3['FanReplaced'] =='Yes'){
+				echo "Fan has been replaced<br>";
+			}
+			if($row3['BezelReplaced'] =='Yes'){
+				echo "Bezel has been replaced<br>";
+			}
+			if($row3['MotherBoardReplaced'] =='Yes'){
+				echo "Motherboard has been replaced<br>";
+			}
+			if($row3['UnitReplaced'] =='Yes'){
+				echo "Unit has been replaced<br>";
+			}
+		}
+		}
+		else{
+			echo "No laptops have come in somehow";
 		}
 		echo "<br>";
 		
