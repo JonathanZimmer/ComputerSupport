@@ -32,6 +32,17 @@ promptLogin(1);
 		 
 		 $LaptopBrand=$_POST['LaptopBrand'];
 		 $Student="";
+				$result = mysql_query("SELECT COUNT(*) FROM `Spares` WHERE `LaptopID` = $LaptopID");
+				if (!$result) {
+					die(mysql_error());
+				}
+				else{
+					"<br>";
+				}
+				if (mysql_result($result, 0, 0) > 0) {
+					echo "This spare has already been entered";
+				}
+		 else{
 
 		 $EnterSpare = "INSERT INTO `Spares`(`Student`, `LaptopID`, `LaptopBrand`) VALUES (
 			'".$Student."',
@@ -56,7 +67,7 @@ promptLogin(1);
 		 //clear old variables
 		 $_POST['Etch'] = "";
 		 $_POST['LaptopBrand'] = "";
-              
+		 }       
  }
 		?>
 	</div>

@@ -8,7 +8,6 @@
  		// Return the number of rows in result set
 		$rowcount=mysql_num_rows($result);
 	}
-	$rowcount=$rowcount+1;
 ?>
 <center>
 	<div class="centeringDiv">
@@ -257,6 +256,7 @@
 
 		<?php
 			if ($_POST){
+				$rowcount=$rowcount+1;
 				$DateRecieved=str_replace("'","",$_POST['DateRecieved']);
 				$RecievedBy=str_replace("'","",$_POST['RecievedBy']);
 				$Problem=str_replace("'","",$_POST['Problem']);
