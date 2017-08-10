@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `LaptopHistory` (
   `RepairedBy` int(3) NOT NULL,
   `DateRepaired` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 
 -----------------------------------------------------------
@@ -93,14 +93,16 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `GradYear` int(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
  
---
--- Dumping data for table `LaptopBrand`
---
- 
-/* INSERT INTO `inventory` (`StudentOwner`, `LaptopID`, `Brand`, `GradYear`) VALUES 
- ('Joe', '123', 'Lenovo n21', 2018), 
- ('Charlie', '11', 'Dell', 2018); */
+DROP TABLE IF EXISTS `Spares`;
+CREATE TABLE IF NOT EXISTS `Spares` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Student` varchar(64) NOT NULL,
+  `LaptopID` varchar(64) NOT NULL,
+  `LaptopBrand` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`))
+  ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 -----------------------------------------------------------
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
