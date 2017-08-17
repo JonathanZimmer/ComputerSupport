@@ -2,18 +2,37 @@
 	<?php
 		require_once "config.php";
 		require_once "functions.php";
-		makeHeader("Spares","Spare Laptops",3,"SparesPage.php");
+		makeHeader("Spares","Spare Laptops",3,"SparesPage.php","<style>td{color:black;}</style>");
+		$url1=$_SERVER['REQUEST_URI'];
+    header("Refresh: 15; URL=$url1");
 		$conn = mysql_connect("localhost", $g_username, $g_password);
 		mysql_select_db('stt', $conn);
-		$None="";
-		$CountOut= mysql_query("SELECT COUNT(*) FROM `Spares` WHERE `Student` != '' ");
+		echo "<h2>Spares In</h2>";
+		$CountOut= mysql_query("SELECT COUNT(*) FROM `Spares` WHERE `Student` != 'NoStudent' ");
 		if (mysql_result($CountOut, 0, 0) > 0) {
-			$Out=mysql_query("SELECT * FROM Spares WHERE Students != '' ");
+			$MainQuery=mysql_query("SELECT * FROM Spares WHERE Student != 'NoStudent' ");
+			echo "<table><tr><td>Student Name</td><td>Laptop Etch Number</td><td>Laptop Model</td></tr>";
+			while($row = mysql_fetch_array($MainQuery)){
+				echo "<tr><td>".$row['Student']."</td><td>".$row['LaptopID']."</td><td>".$row['LaptopBrand']."</td><td><button>Returned Spare?</button></td></tr>";
+			}
 		}
 		else{
 			echo "No spares are out<br>";
-			echo $CountOut;
-			
 		}
+		echo "</table>";
+ 		$CountIn=mysql_query("SELECT COUNT(*) FROM `Spares` WHERE `Student` = 'NoStudent' ");
+		if (mysql_result($CountIn, 0, 0) > 0) {
+			$SideQuery=mysql_query("SELECT * FROM Spares WHERE Student = 'NoStudent' ");
+			echo "<h2>Spares Out</h2>";
+			echo "<table><tr><td>Laptop Etch Number</td><td>Laptop Model</td></tr>";
+			while($row2 = mysql_fetch_array($SideQuery)){
+				echo "<tr><td>".$row2['LaptopID']."</td><td>".$row2['LaptopBrand']."</td><td><button>Assign</button></td></tr>";
+			}
+		}
+		else{
+			echo "We have no spares. Get more fixed";
+		}
+		echo "</table>";
 	?>
 </center>
+
