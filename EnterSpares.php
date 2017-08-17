@@ -31,7 +31,7 @@ promptLogin(1);
 		 $LaptopID=$_POST['Etch'];
 		 
 		 $LaptopBrand=$_POST['LaptopBrand'];
-		 $Student="";
+		 $Student="NoStudent";
 				$result = mysql_query("SELECT COUNT(*) FROM `Spares` WHERE `LaptopID` = $LaptopID");
 				if (!$result) {
 					die(mysql_error());
@@ -72,3 +72,5 @@ promptLogin(1);
 		?>
 	</div>
 </center>
+
+
