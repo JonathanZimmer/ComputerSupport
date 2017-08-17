@@ -14,7 +14,6 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 	echo $hhtml;
 	echo("
 		</head>
-		<body onload='calculateStuff();'>
 			<div class='header'>
 				<h1 id='headerTitle'>". $ptitle . "</h1>
 				");
@@ -70,7 +69,6 @@ function promptLogin($isAdmin=0)
    	 die('Invalid query: ' . mysql_error());
 		}
 	}
-
 
 
 ?>
