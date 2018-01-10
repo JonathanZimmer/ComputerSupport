@@ -60,7 +60,7 @@
 						<td>
 							<textarea name="Problem" placeholder="Problem"></textarea>
 						</td>
-					</tr>
+					</tr=
 			</table>
 			<br>
 			<table>

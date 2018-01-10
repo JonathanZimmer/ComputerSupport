@@ -20,44 +20,24 @@
 			echo "No spares are out<br>";
 		}
 		echo "</table>";
-	
-	/*		if(!isset($_GET['kiosk'])){
-				echo "<tr><td>Who fixed it?</td><td><select name='FixedBy'>";
-				echo "<option value='14'>-----</option></tr>";
-				$query = "SELECT LaptopID, id FROM Spares WHERE Student != NoStudent";
-				$resul = mysql_query($query);
-				while ($ro = mysql_fetch_assoc($resul)) {
-					echo "<option value='".$ro['id']."'>".$ro['LaptopID']."</option><br>";
-				}
-			}
-			echo "<br>me";
-	*/
-			echo "<br><h2>Spares In</h2>";
 
+    echo "<br><h2>Spares In</h2>";
  		$CountIn=mysql_query("SELECT COUNT(*) FROM `Spares` WHERE `Student` = 'NoStudent' ");
 		if (mysql_result($CountIn, 0, 0) > 0) {
 			$SideQuery=mysql_query("SELECT * FROM Spares WHERE Student = 'NoStudent' ");
 			echo "<table><tr><td>Laptop Etch Number</td><td>Laptop Model</td></tr>";
-			while($row2 = mysql_fetch_array($SideQuery)){
-				echo "<tr><td>".$row2['LaptopID']."</td><td>".$row2['LaptopBrand']."</td><td>"
-/*				?>
-					<select name="SpareOut">
-						<option selected onChange="document.getElementById('GoingOut').style='display: table-row'">Still In</option>
-						<option>Lent Out</option>
-					</select>
-				<?php*/
-				"</td></tr>";
-			}
-		}
-		else{
-			echo "We have no spares. Get more fixed";
-		}
+			while($row = mysql_fetch_array($SideQuery)){
+				echo "<tr><td>".$row['LaptopID']."</td><td>".$row['LaptopBrand']."</td></tr>"; 
+      }
+      echo "</table>";
+    }
+	else{
+		echo "We have no spares. Get more fixed";
+	}
 	echo "</table>";
-
-	
-	echo "<tr id=GoingOut style=display:none><td></td><td><textarea name=Out></textarea></td></tr>";
-	
-	
+  
+		
 	?>
+</center>
 </center>
 
