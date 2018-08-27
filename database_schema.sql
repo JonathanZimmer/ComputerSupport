@@ -65,3 +65,9 @@ CREATE TABLE IF NOT EXISTS `Spares` (
 
 INSERT INTO `students` (`id`, `username`, `password`, `name`, `active`, `admin`) VALUES
 (1, 'admin', '$2a$10$E0hKDlY5A7HrmatD9vcSMeO8opsr.C.ZVV5j9fxCrldmq/TZGmbZC', 'Admin', 1, 1);
+
+INSERT INTO `Spares` (`id`, `Student`, `LaptopID`, `LaptopBrand`) VALUES
+(1, 'Joe', '8807', 'Lenovo');
+(2, 'Jim', '33', 'Dell');
+(3, 'Bob', '42', 'Dell');
+(4, 'NoStudent', '9', 'Apple');
