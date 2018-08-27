@@ -6,8 +6,8 @@
 	$sql="SELECT id FROM LaptopHistory ORDER BY id";
 	if ($result=mysql_query($sql,$conn)){
  		// Return the number of rows in result set
-		$rowcount=mysql_num_rows($result);
-	}
+		$rowcount=mysql_num_rows($result)+1;
+  }
 ?>
 <center>
 	<div class="centeringDiv">

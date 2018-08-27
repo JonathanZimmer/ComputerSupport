@@ -104,6 +104,7 @@
 						}
 					}
 				}
+        //clearing variables
 				mysql_close($conn);
 				$_POST['jStudent'] = "";
 				$_POST['jLaptopID'] = "";
